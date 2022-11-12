@@ -2,7 +2,7 @@
 
 
 # Use official node image as the base image
-FROM node:latest AS build
+FROM node:latest 
 
 # Set the working directory
 WORKDIR /devops-angular
@@ -18,7 +18,7 @@ RUN npm run build --prod
 
 #stage 2: Serve app with nginx server
 FROM nginx:alpine
-COPY --from=build /devops-angular/dist/devops-front-angular /usr/share/nginx/html
+COPY --from=node:latest /devops-angular/dist/devops-front-angular /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
