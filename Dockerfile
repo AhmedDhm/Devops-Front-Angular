@@ -1,10 +1,24 @@
-#stage 1
-FROM node:12-alpine as node-build
+#stage 1: Compile and Build angular codebase
+
+
+# Use official node image as the base image
+FROM node:latest as build
+
+# Set the working directory
 WORKDIR /app
-COPY . .
+
+# Add the source code to app
+COPY ./ /app
+
+# Install all the dependencies
 RUN npm install
+
+# Generate the build of the application
 RUN npm run build --prod
-EXPOSE 9092
-#stage 2
+
+#stage 2: Serve app with nginx server
 FROM nginx:alpine
 COPY --from=node-build /app/dist/devops-front-angular /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
