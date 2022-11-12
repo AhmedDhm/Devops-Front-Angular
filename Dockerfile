@@ -5,10 +5,10 @@
 FROM node:latest AS build
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /devops-angular
 
 # Add the source code to app
-COPY ./ /app
+COPY ./ /devops-angular
 
 # Install all the dependencies
 RUN npm install
@@ -18,7 +18,7 @@ RUN npm run build --prod
 
 #stage 2: Serve app with nginx server
 FROM nginx:alpine
-COPY --from=node-build /app/dist/devops-front-angular /usr/share/nginx/html
+COPY --from=build /devops-angular/dist/devops-front-angular /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
