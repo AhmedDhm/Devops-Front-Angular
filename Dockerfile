@@ -17,8 +17,8 @@ RUN npm install
 RUN npm run build --prod
 
 #stage 2: Serve app with nginx server
-FROM nginx:alpine
-COPY --from=node:latest /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
+#FROM nginx:alpine
+#COPY --from=node:latest /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
