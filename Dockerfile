@@ -8,7 +8,7 @@ FROM node:latest
 WORKDIR /devops-angular
 
 # Add the source code to app
-COPY ./ /devops-angular
+COPY . .
 
 # Install all the dependencies
 RUN npm install
@@ -18,7 +18,7 @@ RUN npm run build --prod
 
 #stage 2: Serve app with nginx server
 FROM nginx:alpine
-COPY --from=node:latest /devops-angular/dist/devops-front-angular /usr/share/nginx/html
+COPY --from=node:latest /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
