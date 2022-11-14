@@ -24,4 +24,4 @@ RUN npm run build --prod
 EXPOSE 80
 
 FROM nginx:1.17.1-alpine
-COPY --from=node:latest --chown=user:docker /dist/crudtuto-Front /usr/share/nginx/html
+COPY /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
