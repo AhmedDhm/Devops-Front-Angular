@@ -1,10 +1,8 @@
 #stage 1: Compile and Build angular codebase
 
 
-# Use official nginx image as the base image
-
-FROM nginx:1.17.1-alpine
-
+# Use official node image as the base image
+FROM node:latest 
 
 # Set the working directory
 WORKDIR /devops-angular
@@ -18,4 +16,12 @@ RUN npm install
 # Generate the build of the application
 RUN npm run build --prod
 
-COPY /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
+#stage 2: Serve app with nginx server
+#FROM nginx:alpine
+#COPY --from=node:latest /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+FROM nginx:1.17.1-alpine
+COPY --from=node:latest --chown=user:docker /dist/crudtuto-Front /usr/share/nginx/html
