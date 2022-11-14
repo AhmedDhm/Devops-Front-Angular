@@ -2,26 +2,26 @@
 
 
 # Use official node image as the base image
-FROM node:latest 
+#FROM node:latest 
 
 # Set the working directory
-WORKDIR /devops-angular
+#WORKDIR /devops-angular
 
 # Add the source code to app
-COPY . .
+#COPY . .
 
 # Install all the dependencies
-RUN npm install
+#RUN npm install
 
 # Generate the build of the application
-RUN npm run build --prod
+#RUN npm run build --prod
 
 #stage 2: Serve app with nginx server
 #FROM nginx:alpine
 #COPY --from=node:latest /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
 
 # Expose port 80
-EXPOSE 80
+#EXPOSE 80
 
 FROM nginx:1.17.1-alpine
-COPY /devops-angular/dist/crudtuto-Front /usr/share/nginx/html
+COPY /dist/crudtuto-Front /usr/share/nginx/html
